@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex/package.json",
+                "localRoot": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex"
+            }
+        }
+    ]
+}

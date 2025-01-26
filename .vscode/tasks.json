@@ -1,0 +1,46 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex/Dockerfile",
+				"context": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex",
+				"pull": true
+			},
+			"node": {
+				"package": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node",
+			"node": {
+				"package": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development"
+				}
+			},
+			"node": {
+				"package": "${workspaceFolder}/lego-master/slides/dist/plugin/multiplex/package.json",
+				"enableDebugging": true
+			}
+		}
+	]
+}
